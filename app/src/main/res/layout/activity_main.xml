@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/playfair_display_bold"
-        android:text="To Do Listttt"
+        android:text="To Do List"
         android:textColor="#191970"
         android:textSize="70sp" />
 
