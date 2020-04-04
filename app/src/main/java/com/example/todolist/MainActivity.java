@@ -1,5 +1,6 @@
 package com.example.todolist;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void new_task_click(View view) {
-        Intent intent = new Intent(MainActivity.this, new_task.class);
+        Intent intent = new Intent(MainActivity.this, NewTaskActivity.class);
         startActivity(intent);
     }
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS tasks (id INTEGER, importance INTEGER, description TEXT, deadline TEXT)");
     }
+
 
 
 }
