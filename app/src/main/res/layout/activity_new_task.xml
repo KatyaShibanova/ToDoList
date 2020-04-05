@@ -2,49 +2,48 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:paddingRight="18dp"
-    android:paddingLeft="18dp"
-
-
-    android:layout_marginTop="33dp">
+    android:paddingHorizontal="20dp"
+    android:layout_marginTop="10dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_frame"
+        android:layout_marginVertical="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
             android:hint="@string/newTask_name"
             android:inputType="textMultiLine"
-            android:strokeWidth="2"
-            android:strokeColor="#dfdfdf"
-            android:tag="@string/priority"
-            android:textSize="18sp" />
+
+            android:textSize="18sp"
+            />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_frame"
+        android:layout_marginVertical="10dp"
+        >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/newTask_description"
             android:inputType="textMultiLine"
-            android:textSize="18sp"
-            android:strokeWidth="2"
-            android:strokeColor="#dfdfdf" />
+            android:textSize="18sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginVertical="10dp"
         android:orientation="horizontal"
-        android:paddingTop="18dp">
+        >
 
         <TextView
             android:id="@+id/textView2"
@@ -53,6 +52,7 @@
             android:layout_weight="0"
             android:paddingEnd="25dp"
             android:paddingStart="5dp"
+            android:paddingVertical="20dp"
             android:textSize="18sp"
             android:text="@string/priority" />
 
@@ -60,27 +60,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_frame"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="5dp">
 
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="25dp"
+                android:layout_marginHorizontal="20dp"
                 android:text="@string/priority_1" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="25dp"
+                android:layout_marginHorizontal="20dp"
                 android:text="@string/priority_2" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
                 android:text="@string/priority_3" />
         </RadioGroup>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_save"
+        android:background="@drawable/rounded_button"/>
 </LinearLayout>

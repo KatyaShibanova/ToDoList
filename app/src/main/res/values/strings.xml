@@ -24,5 +24,6 @@
     <string name="priority_1">1</string>
     <string name="priority_2">2</string>
     <string name="priority_3">3</string>
+    <string name="button_save">Сохранить</string>
 
 </resources>
