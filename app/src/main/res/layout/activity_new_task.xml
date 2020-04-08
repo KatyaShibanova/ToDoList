@@ -1,4 +1,7 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
@@ -14,28 +17,33 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/newTask_name"
             android:inputType="textMultiLine"
-
+            android:background="@android:color/transparent"
             android:textSize="18sp"
+            android:paddingHorizontal="10dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:background="@drawable/rounded_frame"
         android:layout_marginVertical="10dp"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/newTask_description"
             android:inputType="textMultiLine"
-            android:textSize="18sp"/>
+            android:background="@android:color/transparent"
+            android:textSize="18sp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="0dp"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
@@ -70,20 +78,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:text="@string/priority_1" />
+                android:theme="@style/RadioButton_1"
+                 />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:text="@string/priority_2" />
+                android:text="@string/priority_2"
+                android:theme="@style/RadioButton_2"
+                tools:text="@string/priority_2" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:theme="@style/RadioButton_3"
                 android:text="@string/priority_3" />
         </RadioGroup>
     </LinearLayout>
@@ -94,5 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_save"
+        android:textSize="17sp"
+        android:textColor="@color/white"
         android:background="@drawable/rounded_button"/>
 </LinearLayout>

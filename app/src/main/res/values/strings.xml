@@ -25,5 +25,9 @@
     <string name="priority_2">2</string>
     <string name="priority_3">3</string>
     <string name="button_save">Сохранить</string>
-
+    <string name="labelCurrentTasks">Текущие задачи</string>
+    <string name="labelNewTask">Новая задача</string>
+    <string name="text_choose">ВЫБЕРИТЕ ДЕЙСТВИЕ</string>
+    <string name="sortByDate">По дате</string>
+    <string name="sortByPriority">По приоритету</string>
 </resources>

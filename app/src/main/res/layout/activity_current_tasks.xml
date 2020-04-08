@@ -13,27 +13,36 @@
         android:layout_height="match_parent" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="0.1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle">
         <Button
             android:id="@+id/sort_date"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="0.5"
-            android:text="По дате"
-            android:textStyle="bold"
+            android:text="@string/sortByDate"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/white"
+            android:textSize="17sp"
             android:onClick="sortByDate"/>
         <Button
             android:id="@+id/sort_priority"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="0.5"
-            android:text="По приоритету"
-            android:textStyle="bold"
+            android:text="@string/sortByPriority"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/white"
+            android:textSize="17sp"
             android:onClick="sortByPriority"/>
     </LinearLayout>
 
