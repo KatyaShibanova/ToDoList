@@ -5,15 +5,19 @@ import java.util.Date;
 
 public class Task {
     public String name;
-    public boolean isDone;
-    public Date date;
+    public String description;
     public Priority priority;
+    public Date deadline;
+    public boolean isDone;
 
-    public Task(String name, boolean isDone, Date date, Priority priority){
+    public Task(String name, String description, Priority priority, Date deadline, boolean isDone){
         this.name = name;
-        this.isDone = isDone;
-        this.date = date;
+        this.description = description;
         this.priority = priority;
+        this.deadline = deadline;
+        this.isDone = isDone;
+
     }
+
 }
 

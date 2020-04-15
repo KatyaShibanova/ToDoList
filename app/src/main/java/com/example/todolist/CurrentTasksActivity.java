@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.example.todolist.model.Priority;
 import com.example.todolist.model.Task;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,7 +25,13 @@ public class CurrentTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_tasks);
         tasksList = (ListView) findViewById(R.id.tasks_list);
-        initTaskList();
+        /**initTaskList();*/
+        TaskDB taskDB =  new TaskDB();
+        try {
+            taskDB.getTasks();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void sortByPriority(View v){
@@ -37,15 +44,15 @@ public class CurrentTasksActivity extends AppCompatActivity {
         taskAdapter.notifyDataSetChanged();
     }
 
-    private void initTaskList(){
-        tasks.add(new Task("Задача 1", false, new Date(2019, 12,23), Priority.Low));
-        tasks.add(new Task("Задача 2", false, new Date(), Priority.Medium));
-        tasks.add(new Task("Задача 3", true, new Date(), Priority.Low));
-        tasks.add(new Task("Задача 4", false, new Date(), Priority.High));
-        tasks.add(new Task("Задача 5", true, new Date(), Priority.High));
+    /**private void initTaskList(){
+        tasks.add(new Task("Задача 1","lala", Priority.Low, new Date(2019, 12,23), false));
+        tasks.add(new Task("Задача 2","lala", Priority.Low, new Date(2019, 12,23), false));
+        tasks.add(new Task("Задача 3", "lala", Priority.Low, new Date(2019, 12,23), false));
+        tasks.add(new Task("Задача 4","lala", Priority.Low, new Date(2019, 12,23), false));
+        tasks.add(new Task("Задача 5","lala", Priority.Low, new Date(2019, 12,23), false));
         taskAdapter = new TaskAdapter(this, R.layout.task_list_item, tasks);
         tasksList.setAdapter(taskAdapter);
-    }
+    }*/
 
     private class SortByPriority implements Comparator<Task> {
         public int compare(Task a, Task b) {
@@ -55,7 +62,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
 
     private class SortByDate implements Comparator<Task> {
         public int compare(Task a, Task b) {
-            return a.date.getTime() > b.date.getTime() ? 1 : -1;
+            return a.deadline.getTime() > b.deadline.getTime() ? 1 : -1;
         }
     }
 }

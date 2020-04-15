@@ -108,5 +108,6 @@
         android:text="@string/button_save"
         android:textSize="17sp"
         android:textColor="@color/white"
-        android:background="@drawable/rounded_button"/>
+        android:background="@drawable/rounded_button"
+        android:onClick="save_click"/>
 </LinearLayout>

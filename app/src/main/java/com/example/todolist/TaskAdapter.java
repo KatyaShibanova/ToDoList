@@ -43,7 +43,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         }
         final Task task = items.get(position);
 
-        viewHolder.dateView.setText(dateTOString(task.date));
+        viewHolder.dateView.setText(dateTOString(task.deadline));
         viewHolder.doneView.setChecked(task.isDone);
         viewHolder.doneView.setText(task.name);
 
