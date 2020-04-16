@@ -26,12 +26,8 @@ public class CurrentTasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_current_tasks);
         tasksList = (ListView) findViewById(R.id.tasks_list);
         /**initTaskList();*/
-        TaskDB taskDB =  new TaskDB();
-        try {
-            taskDB.getTasks();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        TaskDB taskDB =  new TaskDB(getApplicationContext());
+        taskDB.getTasks();
     }
 
     public void sortByPriority(View v){
@@ -54,13 +50,13 @@ public class CurrentTasksActivity extends AppCompatActivity {
         tasksList.setAdapter(taskAdapter);
     }*/
 
-    private class SortByPriority implements Comparator<Task> {
+    private static class SortByPriority implements Comparator<Task> {
         public int compare(Task a, Task b) {
             return a.priority.compareTo(b.priority);
         }
     }
 
-    private class SortByDate implements Comparator<Task> {
+    private static class SortByDate implements Comparator<Task> {
         public int compare(Task a, Task b) {
             return a.deadline.getTime() > b.deadline.getTime() ? 1 : -1;
         }

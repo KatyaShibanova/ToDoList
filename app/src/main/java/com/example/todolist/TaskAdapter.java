@@ -22,7 +22,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
     private ArrayList<Task> items;
 //    private OnGroupClickListener onGroupClickListener;
 
-
     public TaskAdapter(Context context, int resource, ArrayList<Task> groups) {
         super(context, resource, groups);
         this.items = groups;

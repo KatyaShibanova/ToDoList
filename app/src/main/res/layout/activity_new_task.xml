@@ -1,7 +1,6 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
@@ -10,9 +9,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_frame"
-        android:layout_marginVertical="10dp">
+        android:layout_marginVertical="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_name"
@@ -29,9 +28,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_frame"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="5dp"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_description"
@@ -42,69 +41,110 @@
             android:background="@android:color/transparent"
             android:textSize="18sp"
             android:paddingHorizontal="10dp"
-            android:paddingVertical="0dp"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginVertical="10dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="5dp"
         android:orientation="horizontal"
         >
 
-        <TextView
+        <!--TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:paddingEnd="25dp"
             android:paddingStart="5dp"
-            android:paddingVertical="20dp"
+            android:paddingVertical="15dp"
             android:textSize="18sp"
-            android:text="@string/priority" />
+            android:text="@string/priority" /-->
 
-        <RadioGroup
+    <!--com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_frame"
+        android:layout_marginVertical="5dp"
+        >
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:hint="@string/priority"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/transparent"
+            android:textColorHint="@color/gray"
+            -->
+
+            <RadioGroup
+                android:hint="@string/priority"
+                android:id="@+id/priority"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_frame"
+                >
+
+                <RadioButton
+                    android:id="@+id/radioButton_priority_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="30dp"
+                    android:textColor="@color/gray"
+                    android:theme="@style/RadioButton_priority_high"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radioButton_priority_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/gray"
+
+                    android:theme="@style/RadioButton_priority_medium" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_priority_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
+                    android:textColor="@color/gray"
+                    android:theme="@style/RadioButton_priority_low"/>
+            </RadioGroup>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="5dp"
+            android:paddingVertical="15dp"
+            android:textSize="18sp"
+            android:text="@string/date"/>
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/rounded_frame"
-            android:paddingVertical="20dp"
-            android:paddingHorizontal="5dp">
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:theme="@style/RadioButton_1"
-                 />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:text="@string/priority_2"
-                android:theme="@style/RadioButton_2"
-                tools:text="@string/priority_2" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:theme="@style/RadioButton_3"
-                android:text="@string/priority_3" />
-        </RadioGroup>
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:spinnersShown="true" />
     </LinearLayout>
 
     <Button
         android:id="@+id/button_save"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="@string/button_save"
         android:textSize="17sp"
         android:textColor="@color/white"

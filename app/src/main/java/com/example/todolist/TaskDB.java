@@ -1,9 +1,14 @@
 package com.example.todolist;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.example.todolist.model.Priority;
 import com.example.todolist.model.Task;
@@ -11,12 +16,14 @@ import com.example.todolist.model.Task;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 
-//import IDataBase;
 
-public class TaskDB implements IDataBase{
+public class TaskDB extends SQLiteOpenHelper implements IDataBase  {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "taskDB";
@@ -28,36 +35,43 @@ public class TaskDB implements IDataBase{
     private static final String KEY_DEADLINE = "deadline";
     private static final String KEY_ISDONE = "isdone";
 
-
     private static SQLiteDatabase db;
 
-    public TaskDB (SQLiteDatabase db){
-        this.db = db;
+    TaskDB(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
         String CREATE_TASKS = "CREATE TABLE IF NOT EXISTS " + TABLE_TASKS + "(" + KEY_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + "VARCHAR" + KEY_DESCRIPTION + "TEXT" + KEY_PRIORITY + "VARCHAR" + KEY_DEADLINE + "VARCHAR" + KEY_ISDONE + "BIT)";
         db.execSQL(CREATE_TASKS);
     }
 
-    public TaskDB() {
-
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop older table if exist
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
+        // Create tables again
+        onCreate(db);
     }
 
-    /**int id, String name, String description, String priority, String deadline, boolean isDone*/
-
-    public void setTask(Task task){
+    public void setTask(String name, String description, Priority priority, Date deadline){
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         /**values.put(KEY_ID, id);*/
-        values.put(KEY_NAME, task.name);
-        values.put(KEY_DESCRIPTION, task.description);
-        values.put(KEY_PRIORITY, String.valueOf(task.priority));
-        values.put(KEY_DEADLINE, task.deadline.toString());
+        values.put(KEY_NAME, name);
+        values.put(KEY_DESCRIPTION, description);
+        /**values.put(KEY_PRIORITY, String.valueOf(priority));
+        values.put(KEY_DEADLINE, deadline.toString());*/
         /**values.put(KEY_ISDONE, task.isDone);*/
 
-        db.insert(TABLE_TASKS, null, values);
+        long newRowId = db.insert(TABLE_TASKS, null, values);
+        db.close();
     }
 
-    public Task getTasks() throws ParseException {
+    /** public Task getTasks() throws ParseException {
         Cursor query = db.rawQuery("SELECT * FROM tasks;", null);
-        /**Task task = new Task();*/
+        //Task task = new Task();
         String name; String description; Priority priority; String deadline; boolean isDone;
         query.moveToFirst();
         name = query.getString(1);
@@ -69,5 +83,22 @@ public class TaskDB implements IDataBase{
 
         Task task = new Task (name, description,priority, dateFormat.parse(deadline), isDone);
         return task;
+    }*/
+
+   public ArrayList<HashMap<String, String>> getTasks(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> taskList = new ArrayList<>();
+        String query = "SELECT name, description, priority, deadline FROM "+ TABLE_TASKS;
+        Cursor cursor = db.rawQuery(query,null);
+        while (cursor.moveToNext()){
+            HashMap<String,String> tasks = new HashMap<>();
+            tasks.put("name",cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+            tasks.put("description",cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)));
+            tasks.put("priority",/**Priority.valueOf()*/cursor.getString(cursor.getColumnIndex(KEY_PRIORITY)));
+            tasks.put("deadline",cursor.getString(cursor.getColumnIndex(KEY_DEADLINE)));
+            taskList.add(tasks);
+        }
+        db.close();
+        return taskList;
     }
 }

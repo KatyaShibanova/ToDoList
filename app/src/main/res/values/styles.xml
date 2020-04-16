@@ -9,19 +9,19 @@
 
     </style>
 
-    <style name="RadioButton_1" parent="Theme.AppCompat">
-        <item name="colorControlActivated">@color/colorPriority_1</item>
+    <style name="RadioButton_priority_high" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/colorPriority_high</item>
         <item name="colorControlNormal">@color/colorBasic</item>
-        <item name="android:text">@string/priority_1</item>
+        <item name="android:text">@string/priority_high</item>
     </style>
-    <style name="RadioButton_2" parent="Theme.AppCompat">
-        <item name="colorControlActivated">@color/colorPriority_2</item>
+    <style name="RadioButton_priority_medium" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/colorPriority_medium</item>
         <item name="colorControlNormal">@color/colorBasic</item>
-        <item name="android:text">@string/priority_2</item>
+        <item name="android:text">@string/priority_medium</item>
     </style>
-    <style name="RadioButton_3" parent="Theme.AppCompat">
-        <item name="colorControlActivated">@color/colorPriority_3</item>
+    <style name="RadioButton_priority_low" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/colorPriority_low</item>
         <item name="colorControlNormal">@color/colorBasic</item>
-        <item name="android:text">@string/priority_3</item>
+        <item name="android:text">@string/priority_low</item>
     </style>
 </resources>
