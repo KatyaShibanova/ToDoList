@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,13 +38,21 @@ public class TaskDB extends SQLiteOpenHelper implements IDataBase  {
 
     private static SQLiteDatabase db;
 
+    Context mContext;
+
     TaskDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mContext = context;
+        db = this.getWritableDatabase();
+        Log.d("DB_debug", "Creating DBHandler");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TASKS = "CREATE TABLE IF NOT EXISTS " + TABLE_TASKS + "(" + KEY_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + "VARCHAR" + KEY_DESCRIPTION + "TEXT" + KEY_PRIORITY + "VARCHAR" + KEY_DEADLINE + "VARCHAR" + KEY_ISDONE + "BIT)";
+//        SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("DB_debug", "Creating TABLE");
+        String CREATE_TASKS = "CREATE TABLE IF NOT EXISTS " + TABLE_TASKS + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + " VARCHAR" + KEY_DESCRIPTION + " TEXT" + KEY_PRIORITY + " VARCHAR" + KEY_DEADLINE + " VARCHAR" + KEY_ISDONE + " BIT)";
+        Log.d("DB_debug", CREATE_TASKS);
         db.execSQL(CREATE_TASKS);
     }
 
@@ -86,10 +95,14 @@ public class TaskDB extends SQLiteOpenHelper implements IDataBase  {
     }*/
 
    public ArrayList<HashMap<String, String>> getTasks(){
-        SQLiteDatabase db = this.getWritableDatabase();
+//        SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> taskList = new ArrayList<>();
         String query = "SELECT name, description, priority, deadline FROM "+ TABLE_TASKS;
-        Cursor cursor = db.rawQuery(query,null);
+        Log.d("DB_debug", query);
+        Cursor cursor = db.query(TABLE_TASKS, null,
+                null, null, null, null, null,
+                null);
+//        Cursor cursor = db.rawQuery(query,null);
         while (cursor.moveToNext()){
             HashMap<String,String> tasks = new HashMap<>();
             tasks.put("name",cursor.getString(cursor.getColumnIndex(KEY_NAME)));
