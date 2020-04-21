@@ -1,153 +1,132 @@
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/rounded_frame"
-        android:layout_marginVertical="5dp">
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/rounded_frame">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:hint="@string/newTask_name"
             android:inputType="textMultiLine"
-            android:background="@android:color/transparent"
-            android:textSize="18sp"
             android:paddingHorizontal="10dp"
-            />
+            android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/rounded_frame"
         android:layout_marginVertical="5dp"
-        >
+        android:background="@drawable/rounded_frame">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newTask_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:hint="@string/newTask_description"
             android:inputType="textMultiLine"
-            android:background="@android:color/transparent"
-            android:textSize="18sp"
             android:paddingHorizontal="10dp"
-            />
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginVertical="5dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
-        <!--TextView
+        <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:paddingEnd="25dp"
-            android:paddingStart="5dp"
             android:paddingVertical="15dp"
-            android:textSize="18sp"
-            android:text="@string/priority" /-->
+            android:paddingStart="5dp"
+            android:paddingEnd="25dp"
+            android:text="@string/priority"
+            android:textSize="18sp" />
 
-    <!--com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_frame"
-        android:layout_marginVertical="5dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RadioGroup
+            android:id="@+id/priority"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_frame"
             android:hint="@string/priority"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/transparent"
-            android:textColorHint="@color/gray"
-            -->
+            android:orientation="horizontal">
 
-            <RadioGroup
-                android:hint="@string/priority"
-                android:id="@+id/priority"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:background="@drawable/rounded_frame"
-                >
+            <RadioButton
+                android:id="@+id/radioButton_priority_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:paddingVertical="15dp"
+                android:textColor="@color/gray"
+                android:theme="@style/RadioButton_priority_high" />
 
-                <RadioButton
-                    android:id="@+id/radioButton_priority_high"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="15dp"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginEnd="30dp"
-                    android:textColor="@color/gray"
-                    android:theme="@style/RadioButton_priority_high"
-                    />
+            <RadioButton
+                android:id="@+id/radioButton_priority_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:paddingVertical="15dp"
+                android:textColor="@color/gray"
+                android:theme="@style/RadioButton_priority_medium" />
 
-                <RadioButton
-                    android:id="@+id/radioButton_priority_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="15dp"
-                    android:layout_marginEnd="40dp"
-                    android:textColor="@color/gray"
+            <RadioButton
+                android:id="@+id/radioButton_priority_low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="15dp"
+                android:textColor="@color/gray"
+                android:theme="@style/RadioButton_priority_low" />
+        </RadioGroup>
+    </LinearLayout>
 
-                    android:theme="@style/RadioButton_priority_medium" />
-
-                <RadioButton
-                    android:id="@+id/radioButton_priority_low"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="15dp"
-                    android:textColor="@color/gray"
-                    android:theme="@style/RadioButton_priority_low"/>
-            </RadioGroup>
-        </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginVertical="5dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:paddingEnd="15dp"
-            android:paddingStart="5dp"
             android:paddingVertical="15dp"
-            android:textSize="18sp"
-            android:text="@string/date"/>
+            android:paddingStart="5dp"
+            android:paddingEnd="15dp"
+            android:text="@string/date"
+            android:textSize="18sp" />
 
         <DatePicker
             android:id="@+id/date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:background="@drawable/rounded_frame"
-            android:datePickerMode="spinner"
             android:calendarViewShown="false"
+            android:datePickerMode="spinner"
             android:spinnersShown="true" />
     </LinearLayout>
 
     <Button
         android:id="@+id/button_save"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="@string/button_save"
-        android:textSize="17sp"
-        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
         android:background="@drawable/rounded_button"
-        android:onClick="save_click"/>
+        android:onClick="save_click"
+        android:text="@string/button_save"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
 </LinearLayout>

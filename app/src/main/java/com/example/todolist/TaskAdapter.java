@@ -49,7 +49,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         return convertView;
     }
 
-    protected String dateTOString(Date date){
+    private String dateTOString(Date date){
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         return  dateFormat.format(date);
     }

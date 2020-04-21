@@ -1,5 +1,7 @@
 package com.example.todolist;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+
+import android.database.sqlite.SQLiteOpenHelper;
+
 
 /**public class NewTaskActivity extends MainActivity {
 
@@ -105,8 +110,11 @@ public class NewTaskActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
                 TaskDB taskDB = new TaskDB(getApplicationContext());
-                taskDB.setTask(inputName, inputDescription, inputPriority, inputDate);
+                setTask(taskDB, inputName, inputDescription, inputPriority, inputDate);
+                //taskDB.getWritableDatabase();
+                //taskDB.setTask(inputName, inputDescription, inputPriority, inputDate);
             }
         });
     }
@@ -115,7 +123,21 @@ public class NewTaskActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD", Locale.ROOT);
         String dateString = (String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
         return dateFormat.parse(dateString);
-}
+    }
+
+    public void setTask(TaskDB taskDB, String name, String description, Priority priority, Date deadline){
+        taskDB.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        //values.put(KEY_ID, id);
+        values.put(TaskDB.KEY_NAME, name);
+        values.put(TaskDB.KEY_DESCRIPTION, description);
+        //values.put(KEY_PRIORITY, String.valueOf(priority));
+        //values.put(KEY_DEADLINE, deadline.toString());
+        //values.put(KEY_ISDONE, task.isDone);
+
+        long newRowId = TaskDB.db.insert(TaskDB.TABLE_TASKS, null, values);
+        TaskDB.db.close();
+    }
 
 }
 
