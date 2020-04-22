@@ -1,21 +1,18 @@
 package com.example.todolist;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.todolist.model.Priority;
-import com.example.todolist.model.Task;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DateFormat;
@@ -23,10 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
-
-import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class NewTaskActivity extends AppCompatActivity {
@@ -34,7 +28,9 @@ public class NewTaskActivity extends AppCompatActivity {
     RadioGroup priority;
     DatePicker deadline;
     Button saveButton;
-    private Object RadioGroup;
+    //RadioGroup radioGroup;
+
+    private static Priority inputPriority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +45,9 @@ public class NewTaskActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        /**deadline.init(year, month, day, new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(),"дата изменена", Toast.LENGTH_SHORT).show();
-            }
-        });*/
         saveButton = (Button)findViewById(R.id.button_save);
+
+
     }
 
     public void save_click(View view){
@@ -65,8 +57,25 @@ public class NewTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String inputName = Objects.requireNonNull(name.getText()).toString();
                 String inputDescription = Objects.requireNonNull(description.getText()).toString();
-                Priority inputPriority = Priority.valueOf((String) RadioGroup);
-                Date inputDate = null;
+
+                priority.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        switch (checkedId) {
+                            case R.id.priority_high:
+                                inputPriority = Priority.High;
+                                break;
+                            case R.id.priority_medium:
+                                inputPriority = Priority.Medium;
+                                break;
+                            default:
+                                inputPriority = Priority.Low;
+                                break;
+                        }
+                    }
+                });
+
+                Date inputDate = new Date();
                 try {
                     inputDate = dateParse(deadline.getYear(), deadline.getMonth(), deadline.getDayOfMonth());
                 } catch (ParseException e) {
@@ -80,14 +89,12 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 TaskDB taskDB = new TaskDB(getApplicationContext());
                 setTask(taskDB, inputName, inputDescription, inputPriority, inputDate);
-                //taskDB.getWritableDatabase();
-                //taskDB.setTask(inputName, inputDescription, inputPriority, inputDate);
             }
         });
     }
 
     public Date dateParse(int year, int month, int dayOfMonth) throws ParseException {
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD", Locale.ROOT);
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
         String dateString = (String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
         return dateFormat.parse(dateString);
     }
