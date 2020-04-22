@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,45 +28,6 @@ import java.util.Objects;
 
 import android.database.sqlite.SQLiteOpenHelper;
 
-
-/**public class NewTaskActivity extends MainActivity {
-
-    //@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_task);
-    }
-
-    public void save_click(int id, String name, String description, String priority, Date deadline, boolean isDone) {
-
-        TaskDB taskDB = new TaskDB();
-        final Task task = new Task(name,description, Priority.Medium,deadline,false);
-
-        final TextInputEditText inputName = findViewById(R.id.newTask_name);
-        inputName.addTextChangedListener(new TextWatcher() {
-            //@Override
-            public void afterTextChanged(Editable s) {}
-            //@Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                task.name = s.toString();
-            }
-        });
-
-        final TextInputEditText inputDescription = findViewById(R.id.newTask_description);
-        inputDescription.addTextChangedListener(new TextWatcher() {
-            //@Override
-            public void afterTextChanged(Editable s) {}
-            //@Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                task.description = s.toString();
-            }
-        });
-
-        taskDB.setTask(task);
-    }
-}*/
 
 public class NewTaskActivity extends AppCompatActivity {
     TextInputEditText name, description;
@@ -111,6 +73,11 @@ public class NewTaskActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                Log.i("NewTaskActivity", "Work with database, info");
+                Log.e("NewTaskActivity", "Work with database, error");
+                Log.w("NewTaskActivity", "Work with database, warning");
+
+
                 TaskDB taskDB = new TaskDB(getApplicationContext());
                 setTask(taskDB, inputName, inputDescription, inputPriority, inputDate);
                 //taskDB.getWritableDatabase();
@@ -131,9 +98,10 @@ public class NewTaskActivity extends AppCompatActivity {
         //values.put(KEY_ID, id);
         values.put(TaskDB.KEY_NAME, name);
         values.put(TaskDB.KEY_DESCRIPTION, description);
-        //values.put(KEY_PRIORITY, String.valueOf(priority));
-        //values.put(KEY_DEADLINE, deadline.toString());
-        //values.put(KEY_ISDONE, task.isDone);
+        values.put(TaskDB.KEY_PRIORITY, String.valueOf(priority));
+        values.put(TaskDB.KEY_DEADLINE, deadline.toString());
+        boolean isDone;
+        values.put(TaskDB.KEY_ISDONE, isDone = false);
 
         long newRowId = TaskDB.db.insert(TaskDB.TABLE_TASKS, null, values);
         TaskDB.db.close();

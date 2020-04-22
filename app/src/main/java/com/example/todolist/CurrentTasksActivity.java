@@ -34,6 +34,11 @@ public class CurrentTasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_current_tasks);
         tasksList = (ListView) findViewById(R.id.tasks_list);
         TaskDB taskDB =  new TaskDB(getApplicationContext());
+
+        Log.i("CurrentTasksActivity", "Work with database, info");
+        Log.e("CurrentTasksActivity", "Work with database, error");
+        Log.w("CurrentTasksActivity", "Work with database, warning");
+
         getTasks(taskDB);
     }
 

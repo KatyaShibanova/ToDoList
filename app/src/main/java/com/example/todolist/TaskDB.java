@@ -35,7 +35,7 @@ public class TaskDB extends SQLiteOpenHelper {
     static final String KEY_DESCRIPTION ="description";
     static final String KEY_PRIORITY = "priority";
     static final String KEY_DEADLINE = "deadline";
-    private static final String KEY_ISDONE = "isdone";
+    static final String KEY_ISDONE = "isDone";
 
     static SQLiteDatabase db;
 
@@ -48,7 +48,7 @@ public class TaskDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("DB_debug", "Creating TABLE");
-        String CREATE_TASKS = "CREATE TABLE IF NOT EXISTS " + TABLE_TASKS + "(" + KEY_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + "VARCHAR" + KEY_DESCRIPTION + "TEXT" + KEY_PRIORITY + "VARCHAR" + KEY_DEADLINE + "VARCHAR" + KEY_ISDONE + "BIT)";
+        String CREATE_TASKS = "CREATE TABLE IF NOT EXISTS " + TABLE_TASKS + "(" + KEY_ID + "INTEGER PRIMARY KEY, " + KEY_NAME + "VARCHAR" + KEY_DESCRIPTION + "TEXT" + KEY_PRIORITY + "VARCHAR" + KEY_DEADLINE + "VARCHAR" + KEY_ISDONE + "BIT)";
         Log.d("DB_debug", CREATE_TASKS);
         db.execSQL(CREATE_TASKS);
     }

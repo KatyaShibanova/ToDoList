@@ -18,13 +18,12 @@ public class Task extends AppCompatActivity {
     public Date deadline;
     public boolean isDone;
 
-    public Task(String name, String description, Priority priority, Date deadline /**, boolean isDone*/){
+    public Task(String name, String description, Priority priority, Date deadline, boolean isDone){
         this.name = name;
         this.description = description;
         this.priority = priority;
         this.deadline = deadline;
-        //this.isDone = isDone;
-
+        this.isDone = isDone;
     }
 
     /**public class OnClickListener implements com.example.todolist.model.OnClickListener {
