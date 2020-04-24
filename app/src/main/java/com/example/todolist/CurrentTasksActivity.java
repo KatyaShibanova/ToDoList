@@ -35,9 +35,9 @@ public class CurrentTasksActivity extends AppCompatActivity {
         tasksList = (ListView) findViewById(R.id.tasks_list);
         TaskDB taskDB =  new TaskDB(getApplicationContext());
 
-        Log.i("CurrentTasksActivity", "Work with database, info");
+        /*Log.i("CurrentTasksActivity", "Work with database, info");
         Log.e("CurrentTasksActivity", "Work with database, error");
-        Log.w("CurrentTasksActivity", "Work with database, warning");
+        Log.w("CurrentTasksActivity", "Work with database, warning");*/
 
         getTasks(taskDB);
     }
@@ -80,7 +80,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
         //SQLiteDatabase db = this.getWritableDatabase();
         //taskDB.getWritableDatabase();
         ArrayList<HashMap<String, String>> taskList = new ArrayList<>();
-        String query = "SELECT name, description, priority, deadline FROM "+ TaskDB.TABLE_TASKS;
+        String query = "SELECT name, description, priority, deadline, isDone FROM "+ TaskDB.TABLE_TASKS;
         Log.d("DB_debug", query);
         Cursor cursor = TaskDB.db.query(TaskDB.TABLE_TASKS, null, null,null,null,null,null, null);
         while (cursor.moveToNext()){
@@ -89,6 +89,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
             tasks.put("description",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_DESCRIPTION)));
             tasks.put("priority",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_PRIORITY)));
             tasks.put("deadline",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_DEADLINE)));
+            tasks.put("isDone",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_ISDONE)));
             taskList.add(tasks);
         }
         TaskDB.db.close();

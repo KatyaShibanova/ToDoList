@@ -24,21 +24,20 @@ import java.util.Objects;
 
 
 public class NewTaskActivity extends AppCompatActivity {
+    //инициализация view
     TextInputEditText name, description;
     RadioGroup priority;
     DatePicker deadline;
     Button saveButton;
-    //RadioGroup radioGroup;
-
     private static Priority inputPriority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_task);
-        final DatePicker datePicker;
-        Calendar calendar = Calendar.getInstance();
-        name = (TextInputEditText) findViewById(R.id.newTask_name);
+        setContentView(R.layout.activity_new_task); //соединяем с xml
+        //final DatePicker datePicker;
+        Calendar calendar = Calendar.getInstance(); //объявляем календарь
+        name = (TextInputEditText) findViewById(R.id.newTask_name); //name присваиваем view с id: newTask_name
         description = (TextInputEditText) findViewById(R.id.newTask_description);
         priority = (RadioGroup) findViewById(R.id.priority);
         deadline = (DatePicker) findViewById(R.id.date_picker);
@@ -46,8 +45,6 @@ public class NewTaskActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         saveButton = (Button)findViewById(R.id.button_save);
-
-
     }
 
     public void save_click(View view){
@@ -55,12 +52,12 @@ public class NewTaskActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                String inputName = Objects.requireNonNull(name.getText()).toString();
+                String inputName = Objects.requireNonNull(name.getText()).toString(); //локальная переменная для передачи содержимого name в метод setTask
                 String inputDescription = Objects.requireNonNull(description.getText()).toString();
 
-                priority.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                priority.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { //стандартный метод для работы с RadioGroup
                     @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    public void onCheckedChanged(RadioGroup group, int checkedId) { //перегрузка стандартного метода при изменении RadioButton
                         switch (checkedId) {
                             case R.id.priority_high:
                                 inputPriority = Priority.High;
@@ -77,29 +74,28 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 Date inputDate = new Date();
                 try {
-                    inputDate = dateParse(deadline.getYear(), deadline.getMonth(), deadline.getDayOfMonth());
+                    inputDate = dateParse(deadline.getYear(), deadline.getMonth(), deadline.getDayOfMonth()); //используем уже написанный нами метод
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
-                Log.i("NewTaskActivity", "Work with database, info");
+                /*Log.i("NewTaskActivity", "Work with database, info");
                 Log.e("NewTaskActivity", "Work with database, error");
-                Log.w("NewTaskActivity", "Work with database, warning");
-
+                Log.w("NewTaskActivity", "Work with database, warning");*/
 
                 TaskDB taskDB = new TaskDB(getApplicationContext());
-                setTask(taskDB, inputName, inputDescription, inputPriority, inputDate);
+                setTask(taskDB, inputName, inputDescription, inputPriority, inputDate); //используем уже написанный нами метод
             }
         });
     }
 
-    public Date dateParse(int year, int month, int dayOfMonth) throws ParseException {
+    public Date dateParse(int year, int month, int dayOfMonth) throws ParseException { //метод для обработки даты
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
         String dateString = (String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
         return dateFormat.parse(dateString);
     }
 
-    public void setTask(TaskDB taskDB, String name, String description, Priority priority, Date deadline){
+    public void setTask(TaskDB taskDB, String name, String description, Priority priority, Date deadline){//метод для записи данных в базу
         taskDB.getWritableDatabase();
         ContentValues values = new ContentValues();
         //values.put(KEY_ID, id);
@@ -113,6 +109,5 @@ public class NewTaskActivity extends AppCompatActivity {
         long newRowId = TaskDB.db.insert(TaskDB.TABLE_TASKS, null, values);
         TaskDB.db.close();
     }
-
 }
 
