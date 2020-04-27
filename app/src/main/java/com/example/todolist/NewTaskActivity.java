@@ -45,6 +45,23 @@ public class NewTaskActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         saveButton = (Button)findViewById(R.id.button_save);
+
+        priority.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { //стандартный метод для работы с RadioGroup
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) { //перегрузка стандартного метода при изменении RadioButton
+                switch (checkedId) {
+                    case R.id.priority_high:
+                        inputPriority = Priority.High;
+                        break;
+                    case R.id.priority_medium:
+                        inputPriority = Priority.Medium;
+                        break;
+                    default:
+                        inputPriority = Priority.Low;
+                        break;
+                }
+            }
+        });
     }
 
     public void save_click(View view){
@@ -55,22 +72,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 String inputName = Objects.requireNonNull(name.getText()).toString(); //локальная переменная для передачи содержимого name в метод setTask
                 String inputDescription = Objects.requireNonNull(description.getText()).toString();
 
-                priority.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { //стандартный метод для работы с RadioGroup
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) { //перегрузка стандартного метода при изменении RadioButton
-                        switch (checkedId) {
-                            case R.id.priority_high:
-                                inputPriority = Priority.High;
-                                break;
-                            case R.id.priority_medium:
-                                inputPriority = Priority.Medium;
-                                break;
-                            default:
-                                inputPriority = Priority.Low;
-                                break;
-                        }
-                    }
-                });
+
 
                 Date inputDate = new Date();
                 try {
@@ -91,7 +93,7 @@ public class NewTaskActivity extends AppCompatActivity {
 
     public Date dateParse(int year, int month, int dayOfMonth) throws ParseException { //метод для обработки даты
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
-        String dateString = (String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
+        String dateString = (String.valueOf(year) +"-"+ String.valueOf(month) +"-"+ String.valueOf(dayOfMonth));
         return dateFormat.parse(dateString);
     }
 
@@ -101,7 +103,12 @@ public class NewTaskActivity extends AppCompatActivity {
         //values.put(KEY_ID, id);
         values.put(TaskDB.KEY_NAME, name);
         values.put(TaskDB.KEY_DESCRIPTION, description);
-        values.put(TaskDB.KEY_PRIORITY, String.valueOf(priority));
+        if(priority == null) {
+            values.put(TaskDB.KEY_PRIORITY, String.valueOf(Priority.Low));
+        } else {
+            values.put(TaskDB.KEY_PRIORITY, String.valueOf(priority));
+        }
+
         values.put(TaskDB.KEY_DEADLINE, deadline.toString());
         boolean isDone = false;
         values.put(TaskDB.KEY_ISDONE, isDone);

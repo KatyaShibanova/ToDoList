@@ -26,7 +26,7 @@ public class TaskDB extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         db = this.getWritableDatabase();
         Log.d("DB_debug", "Creating DBHandler");
-        onUpgrade(db, 2, 3);
+//        onUpgrade(db, 2, 3);
     }
 
     @Override
