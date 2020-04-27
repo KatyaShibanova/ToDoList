@@ -96,15 +96,15 @@ public class NewTaskActivity extends AppCompatActivity {
     }
 
     public void setTask(TaskDB taskDB, String name, String description, Priority priority, Date deadline){//метод для записи данных в базу
-        taskDB.getWritableDatabase();
+//        taskDB.getWritableDatabase();
         ContentValues values = new ContentValues();
         //values.put(KEY_ID, id);
         values.put(TaskDB.KEY_NAME, name);
         values.put(TaskDB.KEY_DESCRIPTION, description);
         values.put(TaskDB.KEY_PRIORITY, String.valueOf(priority));
         values.put(TaskDB.KEY_DEADLINE, deadline.toString());
-        boolean isDone;
-        values.put(TaskDB.KEY_ISDONE, isDone = false);
+        boolean isDone = false;
+        values.put(TaskDB.KEY_ISDONE, isDone);
 
         long newRowId = TaskDB.db.insert(TaskDB.TABLE_TASKS, null, values);
         TaskDB.db.close();

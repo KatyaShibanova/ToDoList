@@ -27,19 +27,20 @@ public class CurrentTasksActivity extends AppCompatActivity {
     ArrayList<Task> tasks = new ArrayList<>();
     TaskAdapter taskAdapter;
     ListView tasksList;
+    TaskDB taskDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_tasks);
         tasksList = (ListView) findViewById(R.id.tasks_list);
-        TaskDB taskDB =  new TaskDB(getApplicationContext());
+        this.taskDB =  new TaskDB(getApplicationContext());
 
         /*Log.i("CurrentTasksActivity", "Work with database, info");
         Log.e("CurrentTasksActivity", "Work with database, error");
         Log.w("CurrentTasksActivity", "Work with database, warning");*/
 
-        getTasks(taskDB);
+        getTasks();
     }
 
     public void sortByPriority(View v) {
@@ -76,7 +77,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<HashMap<String, String>> getTasks(TaskDB taskDB){
+    public ArrayList<HashMap<String, String>> getTasks(){
         //SQLiteDatabase db = this.getWritableDatabase();
         //taskDB.getWritableDatabase();
         ArrayList<HashMap<String, String>> taskList = new ArrayList<>();

@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class TaskDB extends SQLiteOpenHelper {
 //объявляем столбцы базы данных
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "taskDB";
     static final String TABLE_TASKS = "tasks";
     private static final String KEY_ID = "id";
@@ -26,12 +26,13 @@ public class TaskDB extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         db = this.getWritableDatabase();
         Log.d("DB_debug", "Creating DBHandler");
+        onUpgrade(db, 2, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {//создаем таблицу
         Log.d("DB_debug", "Creating TABLE");
-        String CREATE_TASKS = "CREATE TABLE IF NOT EXISTS " + TABLE_TASKS + "(" + KEY_ID + "INTEGER PRIMARY KEY, " + KEY_NAME + "VARCHAR," + KEY_DESCRIPTION + "TEXT," + KEY_PRIORITY + "VARCHAR," + KEY_DEADLINE + "VARCHAR," + KEY_ISDONE + "BIT);";
+        String CREATE_TASKS = "CREATE TABLE IF NOT EXISTS " + TABLE_TASKS + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT," + KEY_DESCRIPTION + " TEXT," + KEY_PRIORITY + " TEXT," + KEY_DEADLINE + " TEXT," + KEY_ISDONE + " BIT);";
         Log.d("DB_debug", CREATE_TASKS);
         db.execSQL(CREATE_TASKS);
     }
