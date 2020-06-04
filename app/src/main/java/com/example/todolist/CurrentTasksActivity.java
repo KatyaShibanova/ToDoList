@@ -40,7 +40,8 @@ public class CurrentTasksActivity extends AppCompatActivity {
         Log.e("CurrentTasksActivity", "Work with database, error");
         Log.w("CurrentTasksActivity", "Work with database, warning");*/
 
-        initTaskList();
+        //initTaskList();
+        getTasks();
     }
 
     public void sortByPriority(View v) {
@@ -54,7 +55,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
     }
 
 
-     private void initTaskList(){
+     /*private void initTaskList(){
         tasks = getTasks();
 //       tasks.add(new Task("Задача 1","lala", Priority.Low, new Date(2019, 12,23), false));
 //       tasks.add(new Task("Задача 2","lala", Priority.Low, new Date(2019, 12,23), false));
@@ -63,7 +64,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
 //       tasks.add(new Task("Задача 5","lala", Priority.Low, new Date(2019, 12,23), false));
        taskAdapter = new TaskAdapter(this, R.layout.task_list_item, tasks);
        tasksList.setAdapter(taskAdapter);
-     }
+     }*/
 
 
     private class SortByPriority implements Comparator<Task> {
@@ -78,7 +79,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<Task> getTasks(){
+    public ArrayList<Task> getTasks(){ //метод getTasks, возвращающий данные типа ArrayList<Task>
         //SQLiteDatabase db = this.getWritableDatabase();
         //taskDB.getWritableDatabase();
         ArrayList<Task> taskList = new ArrayList<>();
@@ -95,12 +96,7 @@ public class CurrentTasksActivity extends AppCompatActivity {
                     cursor.getString(cursor.getColumnIndex(TaskDB.KEY_DESCRIPTION)),
                     priority,
                     new Date(cursor.getString(cursor.getColumnIndex(TaskDB.KEY_DEADLINE))),
-                    cursor.getString(cursor.getColumnIndex(TaskDB.KEY_ISDONE)) == "1");
-//            tasks.put("name",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_NAME)));
-//            tasks.put("description",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_DESCRIPTION)));
-//            tasks.put("priority",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_PRIORITY)));
-//            tasks.put("deadline",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_DEADLINE)));
-//            tasks.put("isDone",cursor.getString(cursor.getColumnIndex(TaskDB.KEY_ISDONE)));
+                    cursor.getString(cursor.getColumnIndex(TaskDB.KEY_ISDONE)).equals("1"));
             taskList.add(task);
         }
         TaskDB.db.close();

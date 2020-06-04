@@ -24,7 +24,7 @@ import java.util.Objects;
 
 
 public class NewTaskActivity extends AppCompatActivity {
-    //инициализация view
+    //присваиваем имена объектам разметки
     TextInputEditText name, description;
     RadioGroup priority;
     DatePicker deadline;
@@ -48,7 +48,7 @@ public class NewTaskActivity extends AppCompatActivity {
 
         priority.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { //стандартный метод для работы с RadioGroup
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) { //перегрузка стандартного метода при изменении RadioButton
+            public void onCheckedChanged(RadioGroup group, int checkedId) { //метод при изменении RadioButton
                 switch (checkedId) {
                     case R.id.priority_high:
                         inputPriority = Priority.High;
@@ -72,8 +72,6 @@ public class NewTaskActivity extends AppCompatActivity {
                 String inputName = Objects.requireNonNull(name.getText()).toString(); //локальная переменная для передачи содержимого name в метод setTask
                 String inputDescription = Objects.requireNonNull(description.getText()).toString();
 
-
-
                 Date inputDate = new Date();
                 try {
                     inputDate = dateParse(deadline.getYear(), deadline.getMonth(), deadline.getDayOfMonth()); //используем уже написанный нами метод
@@ -85,7 +83,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 Log.e("NewTaskActivity", "Work with database, error");
                 Log.w("NewTaskActivity", "Work with database, warning");*/
 
-                TaskDB taskDB = new TaskDB(getApplicationContext());
+                TaskDB taskDB = new TaskDB(getApplicationContext()); //создается объект класса TaskDB
                 setTask(taskDB, inputName, inputDescription, inputPriority, inputDate); //используем уже написанный нами метод
             }
         });
@@ -98,7 +96,7 @@ public class NewTaskActivity extends AppCompatActivity {
     }
 
     public void setTask(TaskDB taskDB, String name, String description, Priority priority, Date deadline){//метод для записи данных в базу
-//        taskDB.getWritableDatabase();
+        // taskDB.getWritableDatabase();
         ContentValues values = new ContentValues();
         //values.put(KEY_ID, id);
         values.put(TaskDB.KEY_NAME, name);

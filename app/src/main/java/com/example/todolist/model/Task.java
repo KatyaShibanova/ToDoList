@@ -1,15 +1,8 @@
 package com.example.todolist.model;
-import android.content.Intent;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.todolist.NewTaskActivity;
-import com.example.todolist.TaskDB;
-import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.Date;
-import java.util.Objects;
 
 public class Task extends AppCompatActivity {
     public String name;
