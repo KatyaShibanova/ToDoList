@@ -1,6 +1,7 @@
 package com.example.todolist;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,6 +86,8 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 TaskDB taskDB = new TaskDB(getApplicationContext()); //создается объект класса TaskDB
                 setTask(taskDB, inputName, inputDescription, inputPriority, inputDate); //используем уже написанный нами метод
+
+                toCurrentTasks();
             }
         });
     }
@@ -113,6 +116,11 @@ public class NewTaskActivity extends AppCompatActivity {
 
         long newRowId = TaskDB.db.insert(TaskDB.TABLE_TASKS, null, values);
         TaskDB.db.close();
+    }
+
+    public void toCurrentTasks() { //интент с переходом на активность новой задачи
+        Intent intent = new Intent(NewTaskActivity.this, CurrentTasksActivity.class);
+        startActivity(intent);
     }
 }
 
