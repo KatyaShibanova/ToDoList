@@ -57,19 +57,14 @@ public class CurrentTasksActivity extends AppCompatActivity {
 
      private void initTaskList(){
         tasks = getTasks();
-//       tasks.add(new Task("Задача 1","lala", Priority.Low, new Date(2019, 12,23), false));
-//       tasks.add(new Task("Задача 2","lala", Priority.Low, new Date(2019, 12,23), false));
-//       tasks.add(new Task("Задача 3", "lala", Priority.Low, new Date(2019, 12,23), false));
-//       tasks.add(new Task("Задача 4","lala", Priority.Low, new Date(2019, 12,23), false));
-//       tasks.add(new Task("Задача 5","lala", Priority.Low, new Date(2019, 12,23), false));
-       taskAdapter = new TaskAdapter(this, R.layout.task_list_item, tasks);
-       tasksList.setAdapter(taskAdapter);
+        taskAdapter = new TaskAdapter(this, R.layout.task_list_item, tasks);
+        tasksList.setAdapter(taskAdapter);
      }
 
 
     private class SortByPriority implements Comparator<Task> {
         public int compare(Task a, Task b) {
-            return b.priority.compareTo(a.priority);
+            return a.priority.compareTo(b.priority);
         }
     }
 

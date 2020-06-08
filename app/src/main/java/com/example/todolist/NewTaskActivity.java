@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -93,7 +94,7 @@ public class NewTaskActivity extends AppCompatActivity {
     }
 
     public Date dateParse(int year, int month, int dayOfMonth) throws ParseException { //метод для обработки даты
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD", Locale.getDefault());
         String dateString = (String.valueOf(year) +"-"+ String.valueOf(month) +"-"+ String.valueOf(dayOfMonth));
         return dateFormat.parse(dateString);
     }
