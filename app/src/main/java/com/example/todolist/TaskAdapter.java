@@ -45,8 +45,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         viewHolder.dateView.setText(dateTOString(task.deadline));
         viewHolder.doneView.setChecked(task.isDone);
         viewHolder.doneView.setText(task.name);
-        viewHolder.doneView.setText(task.description);
-        viewHolder.doneView.setText(task.priority.toString());
+        /*viewHolder.doneView.setText(task.description);
+        viewHolder.doneView.setText(task.priority.toString());*/
 
         return convertView;
     }
