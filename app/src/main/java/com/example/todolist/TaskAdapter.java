@@ -2,8 +2,10 @@ package com.example.todolist;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
     private LayoutInflater inflater; //из лэйаута делает вью-элемент
     private int layout;
     private ArrayList<Task> items;
+    //TaskDB taskDB;
+    //this.taskDB =  new TaskDB(getApplicationContext());
 //    private OnGroupClickListener onGroupClickListener;
 
     public TaskAdapter(Context context, int resource, ArrayList<Task> groups) {
@@ -57,18 +61,12 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         viewHolder.nameView.setText(task.name);
         viewHolder.descriptionView.setText(task.description);
 
-        //int[] high = new int[] {task.getResources().getColor(R.color.colorPriority_high) };
-
-        String priorityString = task.priority.toString();
-
-        //ColorStateList color;
-        switch (priorityString) {
-            case "High":
+        //String priorityString = task.priority.toString();
+        switch (task.priority) {
+            case High:
                 viewHolder.doneView.setBackgroundResource(R.drawable.check_high);
-                //color = task.getResources().getColorStateList(R.color.colorPriority_high);
-                //getColorStateList(R.color.colorPriority_high));
                 break;
-            case "Medium":
+            case Medium:
                 viewHolder.doneView.setBackgroundResource(R.drawable.check_medium);
                 break;
             default:
@@ -76,9 +74,16 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 break;
         }
 
+        /*boolean isChecked = viewHolder.doneView.isChecked();
+        if (isChecked){
+            task.isDone = true;
+        }*/
 
-        //setBackgroundTintList(contextInstance.getResources().getColorStateList(R.color.your_xml_name));
+        /*if (viewHolder.doneView.isChecked()){
 
+            long taskId = task.getTaskId();
+            CurrentTasksActivity.taskDone(true, Long.toString(taskId));
+        }*/
 
         return convertView;
     }
@@ -95,7 +100,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         final TextView descriptionView;
         ViewHolder(View view){
             dateView = (TextView) view.findViewById(R.id.currentTasks_date);
-            doneView = (CheckBox) view.findViewById(R.id.isDone);
+            doneView = (CheckBox) view.findViewById(R.id.currentTasks_isDone);
             nameView = (TextView) view.findViewById(R.id.currentTasks_name);
             descriptionView = (TextView) view.findViewById(R.id.currentTasks_description);
         }

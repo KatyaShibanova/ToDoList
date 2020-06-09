@@ -11,15 +11,18 @@
 
     <style name="priority_high" parent="Theme.AppCompat">
         <item name="colorControlActivated">@color/colorPriority_high</item>
-        <item name="android:buttonTint">@color/colorPriority_high</item>
+        <item name="colorControlNormal">@color/colorBasic</item>
+        <item name="android:text">@string/priority_high</item>
     </style>
     <style name="priority_medium" parent="Theme.AppCompat">
         <item name="colorControlActivated">@color/colorPriority_medium</item>
-        <item name="android:buttonTint">@color/colorPriority_medium</item>
+        <item name="colorControlNormal">@color/colorBasic</item>
+        <item name="android:text">@string/priority_medium</item>
     </style>
     <style name="priority_low" parent="Theme.AppCompat">
         <item name="colorControlActivated">@color/colorPriority_low</item>
-        <item name="android:buttonTint">@color/colorPriority_low</item>
+        <item name="colorControlNormal">@color/colorBasic</item>
+        <item name="android:text">@string/priority_low</item>
     </style>
 
     <!--style name="checkboxStyle" parent="Theme.AppCompat">

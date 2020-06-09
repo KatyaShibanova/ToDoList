@@ -13,7 +13,7 @@ public class TaskDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "taskDB";
     static final String TABLE_TASKS = "tasks";
-    private static final String KEY_ID = "id";
+    static final String KEY_ID = "id";
     static final String KEY_NAME = "name";
     static final String KEY_DESCRIPTION ="description";
     static final String KEY_PRIORITY = "priority";

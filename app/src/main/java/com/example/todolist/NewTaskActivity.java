@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
 
@@ -32,6 +33,7 @@ public class NewTaskActivity extends AppCompatActivity {
     DatePicker deadline;
     Button saveButton;
     private static Priority inputPriority;
+    boolean isDone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 Log.w("NewTaskActivity", "Work with database, warning");*/
 
                 TaskDB taskDB = new TaskDB(getApplicationContext()); //создается объект класса TaskDB
-                setTask(taskDB, inputName, inputDescription, inputPriority, inputDate); //используем уже написанный нами метод
+                setTask(inputName, inputDescription, inputPriority, inputDate); //используем уже написанный нами метод
 
                 toCurrentTasks();
             }
@@ -99,7 +101,7 @@ public class NewTaskActivity extends AppCompatActivity {
         return dateFormat.parse(dateString);
     }
 
-    public void setTask(TaskDB taskDB, String name, String description, Priority priority, Date deadline){//метод для записи данных в базу
+    public void setTask(String name, String description, Priority priority, Date deadline){//метод для записи данных в базу
         // taskDB.getWritableDatabase();
         ContentValues values = new ContentValues();
         //values.put(KEY_ID, id);
@@ -112,7 +114,7 @@ public class NewTaskActivity extends AppCompatActivity {
         }
 
         values.put(TaskDB.KEY_DEADLINE, deadline.toString());
-        boolean isDone = false;
+
         values.put(TaskDB.KEY_ISDONE, isDone);
 
         long newRowId = TaskDB.db.insert(TaskDB.TABLE_TASKS, null, values);
@@ -124,4 +126,3 @@ public class NewTaskActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
