@@ -40,14 +40,14 @@ public class NewTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task); //соединяем с xml
         //final DatePicker datePicker;
-        Calendar calendar = Calendar.getInstance(); //объявляем календарь
+//        Calendar calendar = Calendar.getInstance(); //объявляем календарь
         name = (TextInputEditText) findViewById(R.id.newTask_name); //name присваиваем view с id: newTask_name
         description = (TextInputEditText) findViewById(R.id.newTask_description);
         priority = (RadioGroup) findViewById(R.id.priority);
         deadline = (DatePicker) findViewById(R.id.date_picker);
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
+//        int year = calendar.get(Calendar.YEAR);
+//        int month = calendar.get(Calendar.MONTH);
+//        int day = calendar.get(Calendar.DAY_OF_MONTH);
         saveButton = (Button)findViewById(R.id.button_save);
 
         priority.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { //стандартный метод для работы с RadioGroup
@@ -76,12 +76,20 @@ public class NewTaskActivity extends AppCompatActivity {
                 String inputName = Objects.requireNonNull(name.getText()).toString(); //локальная переменная для передачи содержимого name в метод setTask
                 String inputDescription = Objects.requireNonNull(description.getText()).toString();
 
+                int year = deadline.getYear();
+                int month = deadline.getMonth();
+                int day = deadline.getDayOfMonth();
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, day);
+                Log.d("date1", String.valueOf(calendar.getTime()));
+                Date selectedDate = calendar.getTime();
+
                 Date inputDate = new Date();
-                try {
-                    inputDate = dateParse(deadline.getYear(), deadline.getMonth(), deadline.getDayOfMonth()); //используем уже написанный нами метод
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+
+                inputDate = selectedDate; //используем уже написанный нами метод
+
+                Log.d("date1", String.valueOf(inputDate));
+                Log.d("date1", String.valueOf(deadline));
 
                 /*Log.i("NewTaskActivity", "Work with database, info");
                 Log.e("NewTaskActivity", "Work with database, error");
@@ -95,11 +103,11 @@ public class NewTaskActivity extends AppCompatActivity {
         });
     }
 
-    public Date dateParse(int year, int month, int dayOfMonth) throws ParseException { //метод для обработки даты
+    /*public Date dateParse(int year, int month, int dayOfMonth) throws ParseException { //метод для обработки даты
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD", Locale.getDefault());
         String dateString = (String.valueOf(year) +"-"+ String.valueOf(month) +"-"+ String.valueOf(dayOfMonth));
         return dateFormat.parse(dateString);
-    }
+    }*/
 
     public void setTask(String name, String description, Priority priority, Date deadline){//метод для записи данных в базу
         // taskDB.getWritableDatabase();
